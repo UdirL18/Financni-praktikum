@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{graphicx} %za slike
+\usepackage[none]{hyphenat} %da se besede ne delijo
+\setlength{\parindent}{0mm} %da ne bo zamika na začetku odstavkov
+%\newcommand{\pojem}[1]{\textsc{#1}} 
+%\usepackage{textcomp} %sem vklučila zaradi  x pri 4x4 
+\usepackage{enumitem}
+\usepackage{gensymb}
+
+
+\begin{document}
+
+
+\thispagestyle{empty}%
+   \begin{center}
+    {\large\sc Univerza v Ljubljani\\%
+      Fakulteta za matematiko in fiziko}\\%
+      {\large  Univerzitetni študijski program\\ Finančna matematika\par}%
+    \vskip 10em%
+    {\vskip 3em \textsc{FINANČNI PRAKTIKUM\\ \large HORIZONTALNO PREKRIVANJE POLIGONOV}\\\par}%
+    \vfill\null%[5mm]     
+    {\large \textsc{Avtorja}: Luka Bizjak, Lucija Udir\par}%  
+    %{\large \textsc{Mentor}: doc.\  izred. prof. dr. Janez Bernik,\\ prof. dr. Tomaž Košir\par}%
+    {\vskip 2em \large Ljubljana, 2021 \par}%
+\end{center}
+
+\newpage
+\section{Navodilo}
+Generiraj moder in rdeč konveksen poligon v ravnini ter zapiši linearni program, ki poišče potreben minimalni horizontalni premik enega izmed teh dveh poligonov, da poligona postaneta disjunktna. 
+
+\section{Opis problema in načrt za nadalnje delo}
+%Poligona sta disjunktna, če je presek teh dveh likov prazna množica. 
+
+Zgornji problem bova reševala z linearnim programiranjem, ki nam omogoča poiskati optimalno (maksimalno ali minimalno) vrednost izbranih odvisnih spremenljivk,
+ ki zadoščajo določenim omejitvam. Kriterijska funkcija, ki jo maksimiziramo ali minimiziramo, je linearna.  Pri reševanju naloge bova uporabljala programski jezik \textbf{Python}. \\
+ 
+ 
+ Konstruirala bova naključna konveksna poligona in izračunala njuno horizontalno prekrivanje. Konveksen poligon je enostaven mnogokotnik, katerega notranjost je konveksna množica.
+ To pomeni, da vsaka daljica med dvema točkama, ki ležita v notranjosti ali na robu poligona, tudi leži v njem. \\ 
+
+
+ Za reševanje bova potrebovala naslednje funkcije:
+\begin{itemize}
+\item Funkcijo, ki preveri ali je dani poligon konveksen. Torej bo funkcija preverila ali je vsak notranji kot manjši ali enak $180$ \degree. 
+\item Funkcijo, ki bo zgenerirala konveksen poligon in funkcijo, ki ga bo izrisala na koordinatnem sistemu.
+\item Funkcijo za premikanje poligona v smeri abcisne osi, ki bo $x$ koordinatam poligona prištela oziroma odštela dano vrednost. 
+\item Funkcijo, ki bo poiskala potreben minimalni premik rdečega poligona v smeri abcisne osi, da rdeč in moder poligon postaneta disjunktna. To bova izračunala s pomočjo iskanja minimalne absolutne vrednosti ničel 
+funkcije \texttt{f(x, RdecPoligon, ModerPoligon)}, ki premakne rdeč poligon za dani $x$, izračuna presek ter oddaljenost premaknjenega poligona in modrega poligona. Funkcija 
+bo vrnila razliko med presekom in razdaljo. Ko bosta poligona disjunktna, bo ploščina njunega preseka enaka $0$ . Razdalja med njima pa nenegativna. Z večanjem premika rdečega poligona,
+ bo vrednost te funkcije vedno bolj negativna. V primeru, ko ploščina preseka teh dveh poligonov ne bo enaka $0$, bo razdalja enaka $0$. Tako bo vrednost funkcije v tem primeru pozitivna. 
+\item Funkcija, ki bo s poočjo Newtonove metode poiskala najmanjšo (po absolutni vrednosti) ničlo prejšne funkcije. 
+\end{itemize}
+
+%Linearni program:
+%Podatki: Koordinate dveh konveksnih poligonov in njunega preseka 
+%Omejitve: ploscina preseka >= 0, konveksnost
+%Ciljna funkcija: Poiskati moramo minimalno oddaljenost ničel funkcije f(A,d) = A - d od koordinatnega izhodišča. 
+
+
+%\section{LP program}
+%
+%Za iskanje minimalnega vodoravnega premika dveh poligonov, da postaneta disjunktna bova uporabila sledeč  LP:\\
+%
+%Vhodni podatki:
+%\begin{itemize}
+%%\item{$n$ \dots število oglišč poligona; $n \in \mathbb{N}$}
+%\item{$A$ \dots ploscina konveksnega preseka modrega in rdečega poligona}
+%\item{$d$ \dots oddaljenost modrega poligona od rdečega}
+%%\item{$x_{i}$ \dots $x$ koordinata $i$-te točke}
+%%\item{$y_{i}$ \dots $y$ koordinata $i$-te točke}
+%\end{itemize}
+%
+%Spremenljivke:
+%\begin{itemize}
+%\item{$x_{i}= 1$, če je ničla funkcije $f = A - D$ } , sicer je 0
+%\end{itemize}
+%
+%%Točka $(x_i,y_i)$ je v kvadratu generiranim z $(x_j, y_j)$, če veljajo sledeči pogoji:
+%%$$x_j \le x_i \le x_j+1$$
+%%$$y_j \le y_i \le y_j+1$$
+%
+%Iščemo\\
+%$$\max_{i \in Z} \sum_{j\in Z} x_{ij} $$
+%% tu poiščemo največje število presekov kvadratov
+%pri pogojih:
+%$$x_{ij} \in \{0,1\} \quad\forall i,j \in \mathbb{N}\\$$
+
+
+
+\end{document}
+
+koordinate so cela števila
+liki ležijo v kvadratu omejenem s (0,0) in (C,C)
+število stranic je določeno z N
+
+X = [0, ..., c]
+Y = [0, ..., c]
+sortiraj X in Y in določi min in max
